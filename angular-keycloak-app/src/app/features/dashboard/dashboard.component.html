@@ -1,0 +1,14 @@
+<div *ngIf="profile">
+  <h1>Welcome, {{ profile.username }}</h1>
+  <p>First Name: {{ profile.firstName }}</p>
+  <p>Last Name: {{ profile.lastName }}</p>
+  <p>Email: {{ profile.email }}</p>
+
+  <button (click)="callApi()">Call Secured API</button>
+  <div *ngIf="apiResponse">
+    <h2>API Response:</h2>
+    <p>{{ apiResponse }}</p>
+  </div>
+
+  <button (click)="keycloakService.logout()">Logout</button>
+</div>
