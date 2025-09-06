@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   apiResponse: string | undefined;
 
   constructor(
-    private keycloakService: KeycloakService,
+    public keycloakService: KeycloakService,
     private http: HttpClient
   ) { }
 
