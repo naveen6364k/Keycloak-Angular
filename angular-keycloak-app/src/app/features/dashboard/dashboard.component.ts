@@ -29,4 +29,8 @@ export class DashboardComponent implements OnInit {
     this.http.get('http://localhost:8081/api/hello', { responseType: 'text' })
       .subscribe(response => this.apiResponse = response);
   }
+
+  logout() {
+    this.keycloakService.logout();
+  }
 }
