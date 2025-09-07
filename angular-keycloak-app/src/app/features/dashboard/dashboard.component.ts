@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
   standalone: true,
   imports: [CommonModule]
 })
@@ -17,7 +16,7 @@ export class DashboardComponent implements OnInit {
   apiResponse: string | undefined;
 
   constructor(
-    private keycloakService: KeycloakService,
+    public keycloakService: KeycloakService,
     private http: HttpClient
   ) { }
 
