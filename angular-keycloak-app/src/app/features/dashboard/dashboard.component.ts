@@ -64,4 +64,14 @@ export class DashboardComponent implements OnInit {
     console.log('Creating new incident');
     // Implement new incident logic here
   }
+
+  get userInitial(): string {
+    if (this.profile?.firstName && this.profile.firstName.length > 0) {
+      return this.profile.firstName.charAt(0).toUpperCase();
+    }
+    if (this.profile?.username && this.profile.username.length > 0) {
+      return this.profile.username.charAt(0).toUpperCase();
+    }
+    return '';
+  }
 }

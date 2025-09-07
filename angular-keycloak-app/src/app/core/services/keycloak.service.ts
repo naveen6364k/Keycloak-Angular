@@ -32,11 +32,13 @@ export class KeycloakService {
       onLoad: 'login-required',
     });
 
-    if (authenticated) {
+    if (authenticated && this.keycloak.tokenParsed) {
       this._profile = (await this.keycloak.loadUserProfile()) as UserProfile;
-      this._profile.token = this.keycloak.token;
-      this._profile.picture = this.keycloak.tokenParsed['picture'];
-      // console.log(this._profile);
+      if (this._profile) {
+        this._profile.token = this.keycloak.token;
+        this._profile.picture = this.keycloak.tokenParsed['picture'];
+        // console.log(this._profile);
+      }
     }
   }
 

@@ -29,14 +29,14 @@
           </button>
           <div
             class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-            [style.backgroundImage]="'url(' + (profile?.picture || '') + ')'"
+            [style.backgroundImage]="'url(' + (profile.picture || '') + ')'"
             *ngIf="profile.picture"
           ></div>
           <div
             class="flex items-center justify-center size-10 rounded-full bg-gray-200 text-gray-500"
-            *ngIf="!profile.picture"
+            *ngIf="!profile?.picture"
           >
-            {{ profile.username?.charAt(0).toUpperCase() }}
+            {{ userInitial }}
           </div>
         </div>
       </header>
