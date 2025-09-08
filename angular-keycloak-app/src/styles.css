@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+
+:root {
+  --primary-color: #1173d4;
+}
+
+body {
+  font-family: Inter, "Noto Sans", sans-serif;
+}
