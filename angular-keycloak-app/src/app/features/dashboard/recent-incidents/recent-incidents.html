@@ -1,0 +1,50 @@
+<div class="px-4 py-3 @container">
+  <div class="overflow-hidden rounded-md border border-gray-200 bg-white">
+    <table class="w-full">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="table-f21eacfe-d796-4c53-a92a-4f7b81108233-column-120 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Incident ID</th>
+          <th class="table-f21eacfe-d796-4c53-a92a-4f7b81108233-column-240 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+          <th class="table-f21eacfe-d796-4c53-a92a-4f7b81108233-column-360 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Severity</th>
+          <th class="table-f21eacfe-d796-4c53-a92a-4f7b81108233-column-480 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Assigned To</th>
+          <th class="table-f21eacfe-d796-4c53-a92a-4f7b81108233-column-600 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Reported By</th>
+          <th class="table-f21eacfe-d796-4c53-a92a-4f7b81108233-column-720 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date Reported</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200" *ngIf="incidents.length > 0">
+        <tr *ngFor="let incident of incidents">
+          <td class="table-f21eacfe-d796-4c53-a92a-4f7b81108233-column-120 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+            <a class="hover:text-[var(--primary-color)] transition-colors" href="#">{{ incident.id }}</a>
+          </td>
+          <td class="table-f21eacfe-d796-4c53-a92a-4f7b81108233-column-240 px-6 py-4 whitespace-nowrap">
+            <span
+              class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+              [ngClass]="{
+                'bg-red-100 text-red-800': incident.status === 'Open',
+                'bg-yellow-100 text-yellow-800': incident.status === 'In Progress',
+                'bg-green-100 text-green-800': incident.status === 'Resolved'
+              }"
+            >
+              {{ incident.status }}
+            </span>
+          </td>
+          <td class="table-f21eacfe-d796-4c53-a92a-4f7b81108233-column-360 px-6 py-4 whitespace-nowrap">
+            <span
+              class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+              [ngClass]="{
+                'bg-red-100 text-red-800': incident.severity === 'High',
+                'bg-yellow-100 text-yellow-800': incident.severity === 'Medium',
+                'bg-blue-100 text-blue-800': incident.severity === 'Low'
+              }"
+            >
+              {{ incident.severity }}
+            </span>
+          </td>
+          <td class="table-f21eacfe-d796-4c53-a92a-4f7b81108233-column-480 px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ incident.assignedTo }}</td>
+          <td class="table-f21eacfe-d796-4c53-a92a-4f7b81108233-column-600 px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ incident.reportedBy }}</td>
+          <td class="table-f21eacfe-d796-4c53-a92a-4f7b81108233-column-720 px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ incident.dateReported }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
