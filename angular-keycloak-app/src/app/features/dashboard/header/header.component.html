@@ -17,9 +17,10 @@
       <span class="material-symbols-outlined">search</span>
       <input placeholder="Search" (input)="onSearch($event)" />
     </label>
-    <button class="icon-btn" (click)="onViewNotifications()">
+    <a class="icon-btn" [routerLink]="['/notifications']">
       <span class="material-symbols-outlined">notifications</span>
-    </button>
+      <div *ngIf="unreadNotifications > 0" class="notification-badge">{{ unreadNotifications }}</div>
+    </a>
     <div class="profile-menu">
       <button class="avatar-btn" (click)="toggleDropdown()">
         <div

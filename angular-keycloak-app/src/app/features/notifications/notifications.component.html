@@ -1,0 +1,26 @@
+<div class="notifications-page">
+  <app-header></app-header>
+  <main class="notifications-main">
+    <div class="notifications-container">
+      <div class="notifications-header">
+        <h2>Notifications</h2>
+        <button class="mark-all-as-read" (click)="markAllAsRead()">Mark all as read</button>
+      </div>
+      <div class="notifications-list-wrapper">
+        <ul class="notifications-list">
+          <li *ngFor="let notification of notifications" class="notification-item" [class.unread]="!notification.read">
+            <div class="notification-icon" [ngClass]="notification.iconClass">
+              <span class="material-symbols-outlined">{{ notification.icon }}</span>
+            </div>
+            <div class="notification-content">
+              <p class="notification-type">{{ notification.type }}</p>
+              <p class="notification-message">{{ notification.message }}</p>
+              <p class="notification-timestamp">{{ notification.timestamp }}</p>
+            </div>
+            <div *ngIf="!notification.read" class="unread-indicator"></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </main>
+</div>
