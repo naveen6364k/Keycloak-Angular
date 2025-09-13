@@ -13,6 +13,7 @@ import { KeycloakService } from '../../../core/services/keycloak.service';
 export class HeaderComponent implements OnInit {
 
   profile: UserProfile | undefined;
+  isDropdownOpen = false;
 
   constructor(public keycloakService: KeycloakService) { }
 
@@ -29,6 +30,20 @@ export class HeaderComponent implements OnInit {
   onViewNotifications(): void {
     console.log('Viewing notifications');
     // Implement notification logic here
+  }
+
+  toggleDropdown(): void {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+
+  onViewProfile(): void {
+    this.isDropdownOpen = false;
+    alert(JSON.stringify(this.profile, null, 2));
+  }
+
+  onLogout(): void {
+    this.isDropdownOpen = false;
+    this.keycloakService.logout();
   }
 
   get userInitial(): string {

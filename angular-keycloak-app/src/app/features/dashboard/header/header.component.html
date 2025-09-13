@@ -20,16 +20,24 @@
     <button class="icon-btn" (click)="onViewNotifications()">
       <span class="material-symbols-outlined">notifications</span>
     </button>
-    <div
-      class="avatar"
-      [style.backgroundImage]="'url(' + (profile.picture || '') + ')'"
-      *ngIf="profile.picture"
-    ></div>
-    <div
-      class="avatar avatar-initials"
-      *ngIf="!profile?.picture"
-    >
-      {{ userInitial }}
+    <div class="profile-menu">
+      <button class="avatar-btn" (click)="toggleDropdown()">
+        <div
+          class="avatar"
+          [style.backgroundImage]="'url(' + (profile.picture || '') + ')'"
+          *ngIf="profile.picture"
+        ></div>
+        <div
+          class="avatar avatar-initials"
+          *ngIf="!profile?.picture"
+        >
+          {{ userInitial }}
+        </div>
+      </button>
+      <div class="dropdown-menu" *ngIf="isDropdownOpen">
+        <a (click)="onViewProfile()">Profile</a>
+        <a (click)="onLogout()">Logout</a>
+      </div>
     </div>
   </div>
 </header>
