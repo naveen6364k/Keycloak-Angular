@@ -41,37 +41,6 @@
 
     <h2 class="section-title">Recent Incidents</h2>
 
-    <div class="table-wrapper">
-      <table>
-        <thead>
-          <tr>
-            <th>Incident ID</th>
-            <th>Status</th>
-            <th>Severity</th>
-            <th>Assigned To</th>
-            <th>Reported By</th>
-            <th>Date Reported</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let incident of recentIncidents">
-            <td><a [routerLink]="['/incident', incident.id]">{{ incident.id }}</a></td>
-            <td><span class="badge" [ngClass]="{
-              'red': incident.status === 'Open',
-              'yellow': incident.status === 'In Progress',
-              'green': incident.status === 'Resolved'
-            }">{{ incident.status }}</span></td>
-            <td><span class="badge" [ngClass]="{
-              'red': incident.severity === 'High',
-              'yellow': incident.severity === 'Medium',
-              'blue': incident.severity === 'Low'
-            }">{{ incident.severity }}</span></td>
-            <td>{{ incident.assignedTo }}</td>
-            <td>{{ incident.reportedBy }}</td>
-            <td>{{ incident.dateReported }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-recent-incidents [incidents]="recentIncidents"></app-recent-incidents>
   </main>
 </div>

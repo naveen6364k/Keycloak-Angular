@@ -6,13 +6,14 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { Incident } from '../../core/model/incident.model';
 import { IncidentService } from '../../core/services/incident.service';
+import { RecentIncidentsComponent } from './recent-incidents/recent-incidents';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   standalone: true,
-  imports: [CommonModule, HeaderComponent, RouterModule]
+  imports: [CommonModule, HeaderComponent, RouterModule, RecentIncidentsComponent]
 })
 export class DashboardComponent implements OnInit {
 
