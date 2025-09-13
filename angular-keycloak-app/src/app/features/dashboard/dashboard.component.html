@@ -54,45 +54,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><a href="#">INC001</a></td>
-            <td><span class="badge red">Open</span></td>
-            <td><span class="badge red">High</span></td>
-            <td>Alex Bennett</td>
-            <td>Sarah Clark</td>
-            <td>2024-07-26</td>
-          </tr>
-          <tr>
-            <td><a href="#">INC002</a></td>
-            <td><span class="badge yellow">In Progress</span></td>
-            <td><span class="badge yellow">Medium</span></td>
-            <td>Emily Carter</td>
-            <td>David Lee</td>
-            <td>2024-07-25</td>
-          </tr>
-          <tr>
-            <td><a href="#">INC003</a></td>
-            <td><span class="badge green">Resolved</span></td>
-            <td><span class="badge blue">Low</span></td>
-            <td>Michael Evans</td>
-            <td>Jessica Brown</td>
-            <td>2024-07-24</td>
-          </tr>
-          <tr>
-            <td><a href="#">INC004</a></td>
-            <td><span class="badge red">Open</span></td>
-            <td><span class="badge yellow">Medium</span></td>
-            <td>Alex Bennett</td>
-            <td>Robert Green</td>
-            <td>2024-07-23</td>
-          </tr>
-          <tr>
-            <td><a href="#">INC005</a></td>
-            <td><span class="badge yellow">In Progress</span></td>
-            <td><span class="badge red">High</span></td>
-            <td>Emily Carter</td>
-            <td>Laura White</td>
-            <td>2024-07-22</td>
+          <tr *ngFor="let incident of recentIncidents">
+            <td><a [routerLink]="['/incident', incident.id]">{{ incident.id }}</a></td>
+            <td><span class="badge" [ngClass]="{
+              'red': incident.status === 'Open',
+              'yellow': incident.status === 'In Progress',
+              'green': incident.status === 'Resolved'
+            }">{{ incident.status }}</span></td>
+            <td><span class="badge" [ngClass]="{
+              'red': incident.severity === 'High',
+              'yellow': incident.severity === 'Medium',
+              'blue': incident.severity === 'Low'
+            }">{{ incident.severity }}</span></td>
+            <td>{{ incident.assignedTo }}</td>
+            <td>{{ incident.reportedBy }}</td>
+            <td>{{ incident.dateReported }}</td>
           </tr>
         </tbody>
       </table>

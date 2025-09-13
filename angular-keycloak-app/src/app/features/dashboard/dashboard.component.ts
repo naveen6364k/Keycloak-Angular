@@ -2,23 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from '../../core/services/keycloak.service';
 import { UserProfile } from '../../core/model/user-profile';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
-
-export interface Incident {
-  id: string;
-  status: 'Open' | 'In Progress' | 'Resolved';
-  severity: 'High' | 'Medium' | 'Low';
-  assignedTo: string;
-  reportedBy: string;
-  dateReported: string;
-}
+import { Incident } from '../../core/model/incident.model';
+import { IncidentService } from '../../core/services/incident.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   standalone: true,
-  imports: [CommonModule, HeaderComponent]
+  imports: [CommonModule, HeaderComponent, RouterModule]
 })
 export class DashboardComponent implements OnInit {
 
@@ -32,6 +26,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     public keycloakService: KeycloakService,
+    private incidentService: IncidentService
   ) { }
 
   ngOnInit(): void {
@@ -40,14 +35,7 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchIncidents(): void {
-    // Placeholder for fetching incidents from a backend API
-    this.recentIncidents = [
-      { id: 'INC001', status: 'Open', severity: 'High', assignedTo: 'Alex Bennett', reportedBy: 'Sarah Clark', dateReported: '2024-07-26' },
-      { id: 'INC002', status: 'In Progress', severity: 'Medium', assignedTo: 'Emily Carter', reportedBy: 'David Lee', dateReported: '2024-07-25' },
-      { id: 'INC003', status: 'Resolved', severity: 'Low', assignedTo: 'Michael Evans', reportedBy: 'Jessica Brown', dateReported: '2024-07-24' },
-      { id: 'INC004', status: 'Open', severity: 'Medium', assignedTo: 'Alex Bennett', reportedBy: 'Robert Green', dateReported: '2024-07-23' },
-      { id: 'INC005', status: 'In Progress', severity: 'High', assignedTo: 'Emily Carter', reportedBy: 'Laura White', dateReported: '2024-07-22' }
-    ];
+    this.recentIncidents = this.incidentService.getIncidents();
   }
 
   onSearch(event: Event): void {

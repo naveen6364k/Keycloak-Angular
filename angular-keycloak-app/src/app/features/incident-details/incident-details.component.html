@@ -1,0 +1,63 @@
+<div class="incident-details-page" *ngIf="incident">
+  <app-header></app-header>
+  <main class="incident-details-main">
+    <div class="incident-details-container">
+      <div class="incident-details-header">
+        <div class="incident-title">
+          <h1>Incident #{{ incident.id }}: {{ incident.title }}</h1>
+          <p>Reported by {{ incident.reportedBy }} on {{ incident.dateReported }}</p>
+        </div>
+        <div class="incident-actions">
+          <button class="btn primary">Resolve Incident</button>
+          <button class="btn secondary">Escalate Incident</button>
+        </div>
+      </div>
+      <div class="incident-details-body">
+        <div class="incident-details-content">
+          <div class="details-card">
+            <h3>Details</h3>
+            <div class="details-grid">
+              <div class="detail-item">
+                <p class="label">Status</p>
+                <p class="value status" [ngClass]="incident.status.toLowerCase().replace(' ', '-')">{{ incident.status }}</p>
+              </div>
+              <div class="detail-item">
+                <p class="label">Severity</p>
+                <p class="value severity" [ngClass]="incident.severity.toLowerCase()">{{ incident.severity }}</p>
+              </div>
+              <div class="detail-item">
+                <p class="label">Assigned To</p>
+                <p class="value">{{ incident.assignedTo }}</p>
+              </div>
+              <div class="detail-item">
+                <p class="label">Affected Services</p>
+                <p class="value">{{ incident.affectedServices }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="description-card">
+            <h3>Description</h3>
+            <p>{{ incident.description }}</p>
+          </div>
+        </div>
+        <div class="activity-log-container">
+          <div class="activity-log-card">
+            <h3>Activity Log</h3>
+            <div class="activity-log">
+              <div class="log-item" *ngFor="let log of incident.activityLog">
+                <div class="log-icon" [ngClass]="log.iconClass">
+                  <span class="material-symbols-outlined">{{ log.icon }}</span>
+                </div>
+                <div class="log-details">
+                  <p class="log-title">{{ log.title }}</p>
+                  <p class="log-timestamp">{{ log.timestamp }}</p>
+                  <p class="log-description" *ngIf="log.description">{{ log.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
