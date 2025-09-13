@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from '../../core/services/keycloak.service';
 import { UserProfile } from '../../core/model/user-profile';
 import { CommonModule } from '@angular/common';
+import { HeaderComponent } from './header/header.component';
 
 export interface Incident {
   id: string;
@@ -17,7 +18,7 @@ export interface Incident {
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
   standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule, HeaderComponent]
 })
 export class DashboardComponent implements OnInit {
 

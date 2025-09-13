@@ -7,8 +7,8 @@ import { KeycloakService } from '../../../core/services/keycloak.service';
   selector: 'app-header',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './header.html',
-  styleUrls: ['./header.css']
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
