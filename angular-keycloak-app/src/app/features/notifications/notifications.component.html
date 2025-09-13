@@ -8,7 +8,7 @@
       </div>
       <div class="notifications-list-wrapper">
         <ul class="notifications-list">
-          <li *ngFor="let notification of notifications" class="notification-item" [class.unread]="!notification.read">
+          <li *ngFor="let notification of notifications$ | async" class="notification-item" [class.unread]="!notification.read">
             <div class="notification-icon" [ngClass]="notification.iconClass">
               <span class="material-symbols-outlined">{{ notification.icon }}</span>
             </div>
