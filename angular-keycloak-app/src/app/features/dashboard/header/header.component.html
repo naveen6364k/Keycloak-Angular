@@ -1,0 +1,40 @@
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 px-10 py-3">
+  <div class="flex items-center gap-8">
+    <div class="flex items-center gap-2 text-gray-800">
+      <span class="material-symbols-outlined text-3xl text-[var(--primary-color)]"> verified_user </span>
+      <h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">iAssure</h2>
+    </div>
+    <div class="flex items-center gap-6">
+      <a class="text-gray-900 text-sm font-medium leading-normal pb-1 border-b-2 border-[var(--primary-color)]" href="#">Dashboard</a>
+      <a class="text-gray-500 hover:text-gray-900 transition-colors text-sm font-medium leading-normal" href="#">Incidents</a>
+      <a class="text-gray-500 hover:text-gray-900 transition-colors text-sm font-medium leading-normal" href="#">Reports</a>
+      <a class="text-gray-500 hover:text-gray-900 transition-colors text-sm font-medium leading-normal" href="#">Settings</a>
+    </div>
+  </div>
+  <div class="flex flex-1 justify-end gap-4 items-center" *ngIf="profile">
+    <label class="relative min-w-40 max-w-64">
+      <div class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+        <span class="material-symbols-outlined"> search </span>
+      </div>
+      <input
+        class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-md text-gray-800 focus:outline-0 border-gray-300 bg-gray-50 focus:ring-2 focus:ring-[var(--primary-color)] h-10 placeholder:text-gray-500 px-4 pl-10 text-sm font-normal leading-normal"
+        placeholder="Search"
+        (input)="onSearch($event)"
+      />
+    </label>
+    <button class="relative rounded-full p-2 hover:bg-gray-100 transition-colors" (click)="onViewNotifications()">
+      <span class="material-symbols-outlined text-gray-700"> notifications </span>
+    </button>
+    <div
+      class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+      [style.backgroundImage]="'url(' + (profile.picture || '') + ')'"
+      *ngIf="profile.picture"
+    ></div>
+    <div
+      class="flex items-center justify-center size-10 rounded-full bg-gray-200 text-gray-500"
+      *ngIf="!profile?.picture"
+    >
+      {{ userInitial }}
+    </div>
+  </div>
+</header>
