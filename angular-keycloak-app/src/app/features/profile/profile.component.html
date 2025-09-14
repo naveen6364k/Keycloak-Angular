@@ -1,0 +1,38 @@
+<div class="profile-page">
+  <app-header></app-header>
+  <main class="profile-main">
+    <div class="profile-container">
+      <div class="profile-header">
+        <h2>Your Profile</h2>
+        <p>Update your personal information.</p>
+      </div>
+      <div class="profile-form-wrapper">
+        <form (ngSubmit)="saveChanges()">
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="first-name">First name</label>
+              <div class="input-wrapper">
+                <input id="first-name" name="first-name" type="text" [(ngModel)]="profile.firstName" />
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="last-name">Last name</label>
+              <div class="input-wrapper">
+                <input id="last-name" name="last-name" type="text" [(ngModel)]="profile.lastName" />
+              </div>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="email">Email address</label>
+            <div class="input-wrapper">
+              <input id="email" name="email" type="email" [(ngModel)]="profile.email" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>

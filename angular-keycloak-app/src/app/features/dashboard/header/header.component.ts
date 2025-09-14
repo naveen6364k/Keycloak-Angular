@@ -43,11 +43,6 @@ export class HeaderComponent implements OnInit {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
 
-  onViewProfile(): void {
-    this.isDropdownOpen = false;
-    alert(JSON.stringify(this.profile, null, 2));
-  }
-
   onLogout(): void {
     this.isDropdownOpen = false;
     this.keycloakService.logout();

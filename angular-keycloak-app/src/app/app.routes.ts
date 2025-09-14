@@ -3,11 +3,17 @@ import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { AuthGuard } from './core/guard/auth.guard';
 import { IncidentDetailsComponent } from './features/incident-details/incident-details.component';
 import { NotificationsComponent } from './features/notifications/notifications.component';
+import { ProfileComponent } from './features/profile/profile.component';
 
 export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
     canActivate: [AuthGuard],
   },
   {

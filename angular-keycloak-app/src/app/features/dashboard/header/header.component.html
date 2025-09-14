@@ -36,7 +36,7 @@
         </div>
       </button>
       <div class="dropdown-menu" *ngIf="isDropdownOpen">
-        <a (click)="onViewProfile()">Profile</a>
+        <a routerLink="/profile" (click)="toggleDropdown()">Profile</a>
         <a (click)="onLogout()">Logout</a>
       </div>
     </div>
