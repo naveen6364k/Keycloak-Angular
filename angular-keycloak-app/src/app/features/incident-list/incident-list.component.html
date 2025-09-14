@@ -1,0 +1,85 @@
+<div class="incident-list-page">
+  <app-header></app-header>
+  <main class="incident-list-main">
+    <div class="incident-list-container">
+      <div class="incident-list-header">
+        <h2>Incidents</h2>
+        <button class="btn primary">
+          <span class="material-symbols-outlined">add</span>
+          <span>New Incident</span>
+        </button>
+      </div>
+      <div class="incident-list-controls">
+        <div class="search-bar">
+          <span class="material-symbols-outlined">search</span>
+          <input placeholder="Search incidents by ID, type..." type="text" />
+        </div>
+        <div class="action-buttons">
+          <button class="btn secondary">
+            <span class="material-symbols-outlined">filter_list</span>
+            <span>Filter</span>
+          </button>
+          <button class="btn secondary">
+            <span class="material-symbols-outlined">swap_vert</span>
+            <span>Sort</span>
+          </button>
+        </div>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Incident ID</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th>Priority</th>
+              <th>Creation Date</th>
+              <th><span class="sr-only">Edit</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let incident of incidents">
+              <td>{{ incident.id }}</td>
+              <td>{{ incident.title }}</td>
+              <td><span class="badge status-{{ incident.status.toLowerCase().replace(' ', '-') }}">{{ incident.status }}</span></td>
+              <td><span class="badge priority-{{ incident.priority?.toLowerCase() }}">{{ incident.priority }}</span></td>
+              <td>{{ incident.dateReported }}</td>
+              <td><a class="view-link" [routerLink]="['/incident', incident.id]">View</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <nav class="pagination-controls">
+        <div class="rows-per-page">
+          <p>Rows per page:</p>
+          <select id="rows-per-page" name="rows-per-page">
+            <option>10</option>
+            <option>25</option>
+            <option>50</option>
+          </select>
+        </div>
+        <div class="pagination-nav">
+          <p>
+            Showing
+            <span class="font-medium">1</span>
+            to
+            <span class="font-medium">10</span>
+            of
+            <span class="font-medium">15</span>
+            results
+          </p>
+          <div class="nav-buttons">
+            <a href="#">
+              <span class="sr-only">Previous</span>
+              <span class="material-symbols-outlined">chevron_left</span>
+            </a>
+            <a href="#">
+              <span class="sr-only">Next</span>
+              <span class="material-symbols-outlined">chevron_right</span>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </main>
+</div>

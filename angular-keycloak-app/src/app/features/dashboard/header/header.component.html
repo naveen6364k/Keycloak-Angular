@@ -5,8 +5,8 @@
       <h2>iAssure</h2>
     </div>
     <nav>
-      <a class="active" href="#">Dashboard</a>
-      <a href="#">Incidents</a>
+      <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Dashboard</a>
+      <a routerLink="/incidents" routerLinkActive="active">Incidents</a>
       <a href="#">Reports</a>
       <a href="#">Settings</a>
     </nav>
