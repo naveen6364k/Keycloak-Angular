@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserProfile } from '../../../core/model/user-profile';
 import { KeycloakService } from '../../../core/services/keycloak.service';
@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
+  @Output() search = new EventEmitter<string>();
   profile: UserProfile | undefined;
   isDropdownOpen = false;
   unreadNotifications = 0;
@@ -30,8 +30,7 @@ export class HeaderComponent implements OnInit {
 
   onSearch(event: Event): void {
     const query = (event.target as HTMLInputElement).value;
-    console.log('Search query:', query);
-    // Implement search logic here
+    this.search.emit(query);
   }
 
   onViewNotifications(): void {

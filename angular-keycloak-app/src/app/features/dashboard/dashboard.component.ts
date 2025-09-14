@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
   resolvedIncidents = 45;
 
   recentIncidents: Incident[] = [];
+  private allIncidents: Incident[] = [];
 
   constructor(
     public keycloakService: KeycloakService,
@@ -37,13 +38,20 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchIncidents(): void {
-    this.recentIncidents = this.incidentService.getIncidents();
+    this.allIncidents = this.incidentService.getIncidents();
+    this.recentIncidents = this.allIncidents.slice(0, 5);
   }
 
-  onSearch(event: Event): void {
-    const query = (event.target as HTMLInputElement).value;
-    console.log('Search query:', query);
-    // Implement search logic here
+  onSearch(query: string): void {
+    const lowerCaseQuery = query.toLowerCase();
+    if (lowerCaseQuery) {
+      this.recentIncidents = this.allIncidents.filter(incident =>
+        incident.description.toLowerCase().includes(lowerCaseQuery) ||
+        incident.type.toLowerCase().includes(lowerCaseQuery)
+      ).slice(0, 5);
+    } else {
+      this.recentIncidents = this.allIncidents.slice(0, 5);
+    }
   }
 
   onViewNotifications(): void {

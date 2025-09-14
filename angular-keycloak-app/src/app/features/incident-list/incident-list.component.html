@@ -4,7 +4,7 @@
     <div class="incident-list-container">
       <div class="incident-list-header">
         <h2>Incidents</h2>
-        <button class="btn primary">
+        <button class="btn primary" routerLink="/create-incident">
           <span class="material-symbols-outlined">add</span>
           <span>New Incident</span>
         </button>
@@ -12,28 +12,32 @@
       <div class="incident-list-controls">
         <div class="search-bar">
           <span class="material-symbols-outlined">search</span>
-          <input placeholder="Search incidents by ID, type..." type="text" />
+          <input placeholder="Search incidents by ID, type..." type="text" (input)="onSearch($event)" />
         </div>
         <div class="action-buttons">
-          <button class="btn secondary">
-            <span class="material-symbols-outlined">filter_list</span>
-            <span>Filter</span>
-          </button>
-          <button class="btn secondary">
-            <span class="material-symbols-outlined">swap_vert</span>
-            <span>Sort</span>
-          </button>
+          <select class="btn secondary" (change)="onFilter('status', $event.target.value)">
+            <option value="">All Statuses</option>
+            <option value="Open">Open</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+          </select>
+          <select class="btn secondary" (change)="onFilter('priority', $event.target.value)">
+            <option value="">All Priorities</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
         </div>
       </div>
       <div class="table-wrapper">
         <table>
           <thead>
             <tr>
-              <th>Incident ID</th>
-              <th>Type</th>
-              <th>Status</th>
-              <th>Priority</th>
-              <th>Creation Date</th>
+              <th (click)="onSort('id')">Incident ID <span class="material-symbols-outlined">swap_vert</span></th>
+              <th (click)="onSort('title')">Type <span class="material-symbols-outlined">swap_vert</span></th>
+              <th (click)="onSort('status')">Status <span class="material-symbols-outlined">swap_vert</span></th>
+              <th (click)="onSort('priority')">Priority <span class="material-symbols-outlined">swap_vert</span></th>
+              <th (click)="onSort('dateReported')">Creation Date <span class="material-symbols-outlined">swap_vert</span></th>
               <th><span class="sr-only">Edit</span></th>
             </tr>
           </thead>
@@ -43,7 +47,7 @@
               <td>{{ incident.title }}</td>
               <td><span class="badge status-{{ incident.status.toLowerCase().replace(' ', '-') }}">{{ incident.status }}</span></td>
               <td><span class="badge priority-{{ incident.priority?.toLowerCase() }}">{{ incident.priority }}</span></td>
-              <td>{{ incident.dateReported }}</td>
+              <td>{{ incident.dateReported | date: 'medium' }}</td>
               <td><a class="view-link" [routerLink]="['/incident', incident.id]">View</a></td>
             </tr>
           </tbody>
@@ -52,7 +56,7 @@
       <nav class="pagination-controls">
         <div class="rows-per-page">
           <p>Rows per page:</p>
-          <select id="rows-per-page" name="rows-per-page">
+          <select id="rows-per-page" name="rows-per-page" (change)="onPageSizeChange($event)">
             <option>10</option>
             <option>25</option>
             <option>50</option>
@@ -61,19 +65,19 @@
         <div class="pagination-nav">
           <p>
             Showing
-            <span class="font-medium">1</span>
+            <span class="font-medium">{{ (currentPage - 1) * pageSize + 1 }}</span>
             to
-            <span class="font-medium">10</span>
+            <span class="font-medium">{{ currentPage * pageSize > totalIncidents ? totalIncidents : currentPage * pageSize }}</span>
             of
-            <span class="font-medium">15</span>
+            <span class="font-medium">{{ totalIncidents }}</span>
             results
           </p>
           <div class="nav-buttons">
-            <a href="#">
+            <a (click)="goToPage(currentPage - 1)" [class.disabled]="currentPage === 1">
               <span class="sr-only">Previous</span>
               <span class="material-symbols-outlined">chevron_left</span>
             </a>
-            <a href="#">
+            <a (click)="goToPage(currentPage + 1)" [class.disabled]="currentPage === totalPages">
               <span class="sr-only">Next</span>
               <span class="material-symbols-outlined">chevron_right</span>
             </a>

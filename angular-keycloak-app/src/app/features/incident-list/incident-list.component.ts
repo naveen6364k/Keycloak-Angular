@@ -14,28 +14,85 @@ import { IncidentService } from '../../core/services/incident.service';
 })
 export class IncidentListComponent implements OnInit {
 
+  allIncidents: Incident[] = [];
   incidents: Incident[] = [];
+
+  currentPage = 1;
+  pageSize = 10;
+  totalIncidents = 0;
+
+  sortColumn = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
 
   constructor(private incidentService: IncidentService) { }
 
   ngOnInit(): void {
-    this.incidents = this.incidentService.getIncidents();
+    this.allIncidents = this.incidentService.getIncidents();
+    this.totalIncidents = this.allIncidents.length;
+    this.updateIncidents();
   }
 
   onSearch(event: Event): void {
-    const query = (event.target as HTMLInputElement).value;
-    console.log('Search query:', query);
+    const query = (event.target as HTMLInputElement).value.toLowerCase();
+    if (query) {
+      this.incidents = this.allIncidents.filter(incident =>
+        incident.id.toLowerCase().includes(query) ||
+        incident.title.toLowerCase().includes(query)
+      );
+    } else {
+      this.incidents = this.allIncidents;
+    }
+    this.totalIncidents = this.incidents.length;
+    this.updateIncidents();
   }
 
-  onFilter(): void {
-    console.log('Filter button clicked');
+  onFilter(type: 'status' | 'priority', value: string): void {
+    if (value) {
+      this.incidents = this.allIncidents.filter(incident => incident[type] === value);
+    } else {
+      this.incidents = this.allIncidents;
+    }
+    this.totalIncidents = this.incidents.length;
+    this.updateIncidents();
   }
 
-  onSort(): void {
-    console.log('Sort button clicked');
+  onSort(column: string): void {
+    if (this.sortColumn === column) {
+      this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    } else {
+      this.sortColumn = column;
+      this.sortDirection = 'asc';
+    }
+
+    this.incidents.sort((a, b) => {
+      const aValue = a[this.sortColumn];
+      const bValue = b[this.sortColumn];
+
+      if (aValue < bValue) return this.sortDirection === 'asc' ? -1 : 1;
+      if (aValue > bValue) return this.sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+    this.updateIncidents();
   }
 
-  onNewIncident(): void {
-    console.log('New Incident button clicked');
+  updateIncidents(): void {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.incidents = this.allIncidents.slice(startIndex, endIndex);
+  }
+
+  goToPage(page: number): void {
+    this.currentPage = page;
+    this.updateIncidents();
+  }
+
+  onPageSizeChange(event: Event): void {
+    this.pageSize = +(event.target as HTMLSelectElement).value;
+    this.currentPage = 1;
+    this.updateIncidents();
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.totalIncidents / this.pageSize);
   }
 }
