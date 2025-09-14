@@ -1,1 +1,367 @@
-// ... content of the scss file
+:host {
+  --primary-50: #f0f9ff;
+  --primary-100: #e0f2fe;
+  --primary-200: #bae6fd;
+  --primary-300: #7dd3fc;
+  --primary-400: #38bdf8;
+  --primary-500: #0ea5e9;
+  --primary-600: #0284c7;
+  --primary-700: #0369a1;
+  --primary-800: #075985;
+  --primary-900: #0c4a6e;
+}
+
+.reports-page {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  flex-direction: column;
+}
+
+.reports-main {
+  flex: 1;
+  background-color: #f8fafc;
+  padding: 2rem 1rem;
+
+  @media (min-width: 640px) {
+    padding: 2rem 1.5rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 2rem 2rem;
+  }
+}
+
+.reports-container {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
+.reports-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  p {
+    margin-top: 0.25rem;
+    color: #64748b;
+  }
+
+  .action-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    border: 1px solid transparent;
+    cursor: pointer;
+
+    .material-symbols-outlined {
+      font-size: 1rem;
+    }
+
+    &.primary {
+      background-color: var(--primary-600);
+      color: #fff;
+
+      &:hover {
+        background-color: var(--primary-700);
+      }
+    }
+
+    &.secondary {
+      background-color: #fff;
+      color: #334155;
+      border-color: #cbd5e1;
+
+      &:hover {
+        background-color: #f8fafc;
+      }
+    }
+  }
+}
+
+.reports-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.trends-section, .scheduled-reports-section {
+  h3 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #334155;
+  }
+}
+
+.trends-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.trend-card {
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  background-color: #fff;
+  padding: 1.5rem;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  .card-title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #64748b;
+  }
+
+  .card-value {
+    margin-top: 0.25rem;
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .card-change {
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+
+    .material-symbols-outlined {
+      font-size: 1rem;
+    }
+
+    &.positive {
+      color: #16a34a;
+    }
+
+    &.negative {
+      color: #dc2626;
+    }
+  }
+
+  .card-icon {
+    border-radius: 9999px;
+    padding: 0.75rem;
+
+    .material-symbols-outlined {
+      font-size: 1.5rem;
+    }
+
+    &.red {
+      background-color: #fee2e2;
+      color: #ef4444;
+    }
+    &.amber {
+      background-color: #fef3c7;
+      color: #d97706;
+    }
+    &:not(.red):not(.amber) {
+      background-color: var(--primary-100);
+      color: var(--primary-600);
+    }
+  }
+}
+
+.chart-container {
+  margin-top: 1rem;
+  height: 8rem;
+}
+
+.bar-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  padding: 0 0.75rem;
+  height: 8rem;
+}
+
+.bar-item {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  .bar {
+    width: 100%;
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+    background-color: var(--primary-400);
+    height: 100%;
+  }
+
+  .bar-label {
+    margin-top: 0.25rem;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #64748b;
+  }
+}
+
+.progress-bars-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.progress-bar-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+
+  p {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #475569;
+  }
+
+  .progress-bar {
+    height: 0.5rem;
+    width: 100%;
+    border-radius: 9999px;
+    background-color: #e2e8f0;
+  }
+
+  .progress {
+    height: 0.5rem;
+    border-radius: 9999px;
+    background-color: var(--primary-500);
+  }
+
+  .percentage {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #1e293b;
+  }
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  border: 1px solid #e2e8f0;
+  background-color: #fff;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+table {
+  width: 100%;
+  table-layout: auto;
+}
+
+thead {
+  background-color: #f8fafc;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+
+th, td {
+  padding: 1rem 1.5rem;
+}
+
+tbody {
+  tr:not(:last-child) {
+    border-bottom: 1px solid #e2e8f0;
+  }
+}
+
+td {
+  font-size: 0.875rem;
+  color: #334155;
+
+  &.font-medium {
+    font-weight: 500;
+    color: #0f172a;
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+
+  &.status-active {
+    background-color: #dcfce7;
+    color: #166534;
+  }
+
+  &.status-paused {
+    background-color: #f1f5f9;
+    color: #1e293b;
+  }
+}
+
+.btn-link {
+  color: var(--primary-600);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+
+  &:hover {
+    color: var(--primary-800);
+  }
+}
+
+.reports-footer {
+  background-color: #fff;
+  padding: 1.5rem 1rem;
+
+  p {
+    text-align: center;
+    font-size: 0.875rem;
+    color: #64748b;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
