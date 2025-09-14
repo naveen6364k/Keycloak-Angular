@@ -5,6 +5,7 @@ import { IncidentDetailsComponent } from './features/incident-details/incident-d
 import { NotificationsComponent } from './features/notifications/notifications.component';
 import { ProfileComponent } from './features/profile/profile.component';
 import { IncidentListComponent } from './features/incident-list/incident-list.component';
+import { ReportsComponent } from './features/reports/reports.component';
 
 export const routes: Routes = [
   {
@@ -20,6 +21,11 @@ export const routes: Routes = [
   {
     path: 'notifications',
     component: NotificationsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'reports',
+    component: ReportsComponent,
     canActivate: [AuthGuard],
   },
   {

@@ -1,0 +1,150 @@
+<div class="reports-page">
+  <app-header></app-header>
+  <main class="reports-main">
+    <div class="reports-container">
+      <div class="reports-header">
+        <div>
+          <h2>Reports</h2>
+          <p>Generate, download, and schedule reports related to incidents.</p>
+        </div>
+        <div class="action-buttons">
+          <button class="btn secondary">
+            <span class="material-symbols-outlined">download</span>
+            Download
+          </button>
+          <button class="btn primary">
+            <span class="material-symbols-outlined">add</span>
+            Generate Report
+          </button>
+        </div>
+      </div>
+      <div class="reports-body">
+        <section class="trends-section">
+          <h3>Incident Trends</h3>
+          <div class="trends-grid">
+            <div class="trend-card">
+              <div class="card-header">
+                <div>
+                  <p class="card-title">Incidents Over Time</p>
+                  <p class="card-value">1,420</p>
+                  <p class="card-change positive">
+                    <span class="material-symbols-outlined">trending_up</span>
+                    +15% vs last month
+                  </p>
+                </div>
+                <span class="card-icon">
+                  <span class="material-symbols-outlined">show_chart</span>
+                </span>
+              </div>
+              <div class="chart-container">
+                <svg fill="none" height="100%" preserveAspectRatio="none" viewBox="0 0 472 150" width="100%" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H0V109Z" fill="url(#paint0_linear_1)"></path>
+                  <path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25" stroke="var(--primary-600)" stroke-linecap="round" stroke-width="2"></path>
+                  <defs>
+                    <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear_1" x1="236" x2="236" y1="1" y2="149">
+                      <stop stop-color="var(--primary-200)"></stop>
+                      <stop offset="1" stop-color="var(--primary-200)" stop-opacity="0"></stop>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+            <div class="trend-card">
+              <div class="card-header">
+                <div>
+                  <p class="card-title">Average Resolution Time</p>
+                  <p class="card-value">22.5 Hours</p>
+                  <p class="card-change negative">
+                    <span class="material-symbols-outlined">trending_down</span>
+                    -10% vs last month
+                  </p>
+                </div>
+                <span class="card-icon red">
+                  <span class="material-symbols-outlined">timer</span>
+                </span>
+              </div>
+              <div class="chart-container bar-chart">
+                <div class="bar-item" style="height: 70%;">
+                  <div class="bar"></div>
+                  <p class="bar-label">High</p>
+                </div>
+                <div class="bar-item" style="height: 100%;">
+                  <div class="bar" style="height: 60%;"></div>
+                  <p class="bar-label">Medium</p>
+                </div>
+                <div class="bar-item" style="height: 40%;">
+                  <div class="bar"></div>
+                  <p class="bar-label">Low</p>
+                </div>
+              </div>
+            </div>
+            <div class="trend-card">
+              <div class="card-header">
+                <div>
+                  <p class="card-title">Incidents by Category</p>
+                  <p class="card-value">5 categories</p>
+                  <p class="card-change">Most frequent: Network</p>
+                </div>
+                <span class="card-icon amber">
+                  <span class="material-symbols-outlined">category</span>
+                </span>
+              </div>
+              <div class="progress-bars-container">
+                <div class="progress-bar-item">
+                  <p>Hardware</p>
+                  <div class="progress-bar"><div class="progress" style="width: 45%;"></div></div>
+                  <p class="percentage">45%</p>
+                </div>
+                <div class="progress-bar-item">
+                  <p>Software</p>
+                  <div class="progress-bar"><div class="progress" style="width: 25%;"></div></div>
+                  <p class="percentage">25%</p>
+                </div>
+                <div class="progress-bar-item">
+                  <p>Network</p>
+                  <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                  <p class="percentage">80%</p>
+                </div>
+                <div class="progress-bar-item">
+                  <p>Security</p>
+                  <div class="progress-bar"><div class="progress" style="width: 15%;"></div></div>
+                  <p class="percentage">15%</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="scheduled-reports-section">
+          <h3>Scheduled Reports</h3>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Report Name</th>
+                  <th>Frequency</th>
+                  <th>Next Run</th>
+                  <th>Recipients</th>
+                  <th>Status</th>
+                  <th><span class="sr-only">Actions</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let report of scheduledReports">
+                  <td>{{ report.name }}</td>
+                  <td>{{ report.frequency }}</td>
+                  <td>{{ report.nextRun }}</td>
+                  <td>{{ report.recipients }}</td>
+                  <td><span class="badge status-{{ report.status.toLowerCase() }}">{{ report.status }}</span></td>
+                  <td class="actions"><button class="btn-link">Edit</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer class="reports-footer">
+    <p>© 2024 iAssure. All rights reserved.</p>
+  </footer>
+</div>
