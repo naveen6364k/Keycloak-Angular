@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KeycloakService } from '../../core/services/keycloak.service';
 import { UserProfile } from '../../core/model/user-profile';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { Incident } from '../../core/model/incident.model';
 import { IncidentService } from '../../core/services/incident.service';
@@ -27,7 +27,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     public keycloakService: KeycloakService,
-    private incidentService: IncidentService
+    private incidentService: IncidentService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -51,8 +52,7 @@ export class DashboardComponent implements OnInit {
   }
 
   onNewIncident(): void {
-    console.log('Creating new incident');
-    // Implement new incident logic here
+    this.router.navigate(['/create-incident']);
   }
 
   get userInitial(): string {

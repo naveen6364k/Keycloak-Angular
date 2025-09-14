@@ -7,39 +7,46 @@
     </div>
 
     <div class="stepper-container">
-      <div class="step completed">
+      <div class="step" [ngClass]="{'completed': isStepCompleted(1) && currentStep > 1, 'active': currentStep === 1}">
         <div class="step-icon">
-          <span class="material-symbols-outlined">check</span>
+          <span *ngIf="isStepCompleted(1) && currentStep > 1" class="material-symbols-outlined">check</span>
+          <ng-container *ngIf="!isStepCompleted(1) || currentStep <= 1">1</ng-container>
         </div>
         <p class="step-label">Details</p>
       </div>
       <div class="step-line"></div>
-      <div class="step active">
-        <div class="step-icon">2</div>
+      <div class="step" [ngClass]="{'completed': isStepCompleted(2) && currentStep > 2, 'active': currentStep === 2, 'inactive': currentStep < 2}">
+        <div class="step-icon">
+          <span *ngIf="isStepCompleted(2) && currentStep > 2" class="material-symbols-outlined">check</span>
+          <ng-container *ngIf="!isStepCompleted(2) || currentStep <= 2">2</ng-container>
+        </div>
         <p class="step-label">Reporter</p>
       </div>
       <div class="step-line"></div>
-      <div class="step inactive">
-        <div class="step-icon">3</div>
+      <div class="step" [ngClass]="{'completed': isStepCompleted(3) && currentStep > 3, 'active': currentStep === 3, 'inactive': currentStep < 3}">
+        <div class="step-icon">
+          <span *ngIf="isStepCompleted(3) && currentStep > 3" class="material-symbols-outlined">check</span>
+          <ng-container *ngIf="!isStepCompleted(3) || currentStep <= 3">3</ng-container>
+        </div>
         <p class="step-label">Priority</p>
       </div>
       <div class="step-line"></div>
-      <div class="step inactive">
+      <div class="step" [ngClass]="{'active': currentStep === 4, 'inactive': currentStep < 4}">
         <div class="step-icon">4</div>
         <p class="step-label">Attachments</p>
       </div>
     </div>
 
-    <div class="form-container">
-      <div class="form-section">
+    <form class="form-container" [formGroup]="incidentForm">
+      <div class="form-section" *ngIf="currentStep === 1" formGroupName="details">
         <div class="section-header">
           <h3 class="section-title">Incident Details</h3>
           <p class="section-subtitle">Start by providing the basic information about the incident.</p>
         </div>
         <div class="form-field">
           <label class="form-label" for="incident-type">Incident Type*</label>
-          <select class="form-select" id="incident-type" name="incident-type">
-            <option disabled="" selected="">Select Incident Type</option>
+          <select class="form-select" id="incident-type" name="incident-type" formControlName="incidentType">
+            <option disabled="" selected="" value="">Select Incident Type</option>
             <option>Security Breach</option>
             <option>System Outage</option>
             <option>Data Loss</option>
@@ -49,11 +56,11 @@
         </div>
         <div class="form-field">
           <label class="form-label" for="description">Description*</label>
-          <textarea class="form-textarea" id="description" name="description" placeholder="Please provide a detailed description of the incident..."></textarea>
+          <textarea class="form-textarea" id="description" name="description" placeholder="Please provide a detailed description of the incident..." formControlName="description"></textarea>
         </div>
       </div>
 
-      <div class="form-section">
+      <div class="form-section" *ngIf="currentStep === 2" formGroupName="reporter">
         <div class="section-header">
           <h3 class="section-title">Reporter Information</h3>
           <p class="section-subtitle">Who is reporting this incident?</p>
@@ -61,16 +68,16 @@
         <div class="form-grid">
           <div class="form-field">
             <label class="form-label" for="reporter-name">Full Name*</label>
-            <input class="form-input" id="reporter-name" name="reporter-name" placeholder="e.g., Jane Doe" type="text"/>
+            <input class="form-input" id="reporter-name" name="reporter-name" placeholder="e.g., Jane Doe" type="text" formControlName="fullName"/>
           </div>
           <div class="form-field">
             <label class="form-label" for="email">Email Address*</label>
-            <input class="form-input" id="email" name="email" placeholder="e.g., jane.doe@example.com" type="email"/>
+            <input class="form-input" id="email" name="email" placeholder="e.g., jane.doe@example.com" type="email" formControlName="email"/>
           </div>
         </div>
       </div>
 
-      <div class="form-section">
+      <div class="form-section" *ngIf="currentStep === 3" formGroupName="priority">
         <div class="section-header">
           <h3 class="section-title">Priority Assessment</h3>
           <p class="section-subtitle">Help us understand the severity of this incident.</p>
@@ -78,8 +85,8 @@
         <div class="form-grid">
           <div class="form-field">
             <label class="form-label" for="urgency">Urgency*</label>
-            <select class="form-select" id="urgency" name="urgency">
-              <option disabled="" selected="">Select Urgency</option>
+            <select class="form-select" id="urgency" name="urgency" formControlName="urgency">
+              <option disabled="" selected="" value="">Select Urgency</option>
               <option>High</option>
               <option>Medium</option>
               <option>Low</option>
@@ -87,8 +94,8 @@
           </div>
           <div class="form-field">
             <label class="form-label" for="impact">Impact*</label>
-            <select class="form-select" id="impact" name="impact">
-              <option disabled="" selected="">Select Impact</option>
+            <select class="form-select" id="impact" name="impact" formControlName="impact">
+              <option disabled="" selected="" value="">Select Impact</option>
               <option>High</option>
               <option>Medium</option>
               <option>Low</option>
@@ -97,7 +104,7 @@
         </div>
       </div>
 
-      <div class="form-section">
+      <div class="form-section" *ngIf="currentStep === 4" formGroupName="attachments">
         <div class="section-header">
           <h3 class="section-title">Attachments</h3>
           <p class="section-subtitle">Upload any relevant files, screenshots, or logs.</p>
@@ -108,7 +115,7 @@
             <div class="upload-text">
               <label class="upload-link" for="file-upload">
                 <span>Upload a file</span>
-                <input class="sr-only" id="file-upload" multiple="" name="file-upload" type="file"/>
+                <input class="sr-only" id="file-upload" multiple="" name="file-upload" type="file" formControlName="files"/>
               </label>
               <p>or drag and drop</p>
             </div>
@@ -118,9 +125,10 @@
       </div>
 
       <div class="form-actions">
-        <button class="btn btn-secondary" type="button">Back</button>
-        <button class="btn btn-primary" type="submit">Next</button>
+        <button class="btn btn-secondary" type="button" (click)="prevStep()" *ngIf="currentStep > 1">Back</button>
+        <button class="btn btn-primary" type="button" (click)="nextStep()" *ngIf="currentStep < 4">Next</button>
+        <button class="btn btn-primary" type="submit" *ngIf="currentStep === 4">Submit</button>
       </div>
-    </div>
+    </form>
   </div>
 </main>
