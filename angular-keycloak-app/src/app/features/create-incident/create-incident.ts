@@ -12,7 +12,7 @@ import { HeaderComponent } from '../dashboard/header/header.component';
 })
 export class CreateIncidentComponent implements OnInit {
   currentStep = 1;
-  incidentForm: FormGroup;
+  incidentForm!: FormGroup;
 
   constructor(private fb: FormBuilder) {}
 
