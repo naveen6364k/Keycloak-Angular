@@ -1,0 +1,25 @@
+:host {
+  --primary-color: #1173d4;
+  --secondary-color: #f0f6ff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+}
+.form-input {
+  @apply w-full rounded-md border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 placeholder-slate-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500;
+}
+.form-label {
+  @apply mb-2 text-sm font-medium text-slate-700;
+}
+.step-active {
+  @apply border-blue-600 text-blue-600;
+}
+.step-inactive {
+  @apply border-slate-300 text-slate-500;
+}
+.step-completed {
+  @apply border-blue-600 bg-blue-600 text-white;
+}
+.step-line {
+  @apply h-0.5 w-full bg-slate-300;
+}
